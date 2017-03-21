@@ -1,10 +1,16 @@
 group 'ru.alexander'
-version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'war'
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    compile 'com.sun.jersey:jersey-server:1.19'
+    compile 'com.sun.jersey:jersey-core:1.19'
+    compile 'com.sun.jersey:jersey-servlet:1.19'
 }

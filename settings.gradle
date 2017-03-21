@@ -1,1 +1,4 @@
 rootProject.name = 'phonebook'
+include 'phonebook-web'
+include 'phonebook-entity'
+
