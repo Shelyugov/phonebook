@@ -1,0 +1,4 @@
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.9.Final'
+    compile project(':phonebook-entity')
+}
