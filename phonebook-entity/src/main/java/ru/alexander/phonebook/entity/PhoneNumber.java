@@ -11,18 +11,19 @@ public class PhoneNumber extends AbstractEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
-    private PhoneBookEntry entry;
+    private PhonebookEntry entry;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String number;
 
+    @Enumerated(EnumType.STRING)
     private PhoneNumberType phoneNumberType;
 
-    public PhoneBookEntry getEntry() {
+    public PhonebookEntry getEntry() {
         return entry;
     }
 
-    public void setEntry(PhoneBookEntry entry) {
+    public void setEntry(PhonebookEntry entry) {
         this.entry = entry;
     }
 

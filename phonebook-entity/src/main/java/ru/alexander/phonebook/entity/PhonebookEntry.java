@@ -8,7 +8,7 @@ import java.util.Set;
  * Элемент телефонной книги.
  */
 @Entity
-public class PhoneBookEntry extends AbstractEntity implements Serializable {
+public class PhonebookEntry extends AbstractEntity implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private PersonalData person;
