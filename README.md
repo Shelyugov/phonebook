@@ -1,7 +1,7 @@
 # phonebook
-## Phonebook application
+## How to build
 
-To build project, use root phonebook gradle.build file.
+To build project, use root phonebook `gradle.build` file.
 
 ## Required setup:
 
