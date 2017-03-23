@@ -7,5 +7,10 @@
     <endpoint
             name="PhonebookSoap"
             implementation="ru.alexander.phonebook.web.soap.SoapPhonebookController"
-            url-pattern="/soap"/>
+            url-pattern="/soap/PersonalData"/>
+    <endpoint
+            name="WeatherSoap"
+            implementation="ru.alexander.phonebook.web.soap.SoapWeatherController"
+            url-pattern="/soap/Weather"/>
+
 </endpoints>
