@@ -63,4 +63,5 @@ phonebook
 - phonebook-entity
 - phonebook-jpa
 - phonebook-jdbc
+- phonebook-service
 - phonebook-web
