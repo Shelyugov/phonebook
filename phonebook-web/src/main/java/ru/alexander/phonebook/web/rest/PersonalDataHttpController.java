@@ -12,8 +12,10 @@ import java.util.List;
 
 /**
  * Контроллер телефонной книги для обработки HTTP-запросов.
+ * Использует JDBC.
  */
-@Path("/data")
+@Path("/personalData")
+@Produces(MediaType.APPLICATION_XML)
 public class PersonalDataHttpController {
 
     private static final String SUCCESS_RESULT = "<result>success</result>";
@@ -22,15 +24,12 @@ public class PersonalDataHttpController {
     private final PersonalDataRepository repository = new PersonalDataRepository();
 
     @GET
-    @Path("/personalData")
-    @Produces(MediaType.APPLICATION_XML)
     public List<PhonebookDto> getAllPersonalData() {
         return new ArrayList<>(PhonebookDtoHelper.convert(repository.getAllPersonalData()));
     }
 
     @GET
-    @Path("/personalData/{pdId}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Path("/{pdId}")
     public PhonebookDto getPersonalData(@DefaultValue("0") @PathParam("pdId") long id) {
         if (id <= 0) {
             return null;
@@ -39,8 +38,6 @@ public class PersonalDataHttpController {
     }
 
     @PUT
-    @Path("/personalData")
-    @Produces(MediaType.APPLICATION_XML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String addPersonalData(
             @FormParam("name") String name,
@@ -56,8 +53,6 @@ public class PersonalDataHttpController {
 
 
     @POST
-    @Path("/personalData")
-    @Produces(MediaType.APPLICATION_XML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String updatePersonalData(
             @FormParam("id") long id,
@@ -73,8 +68,7 @@ public class PersonalDataHttpController {
     }
 
     @DELETE
-    @Path("/personalData/{pdId}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Path("/{pdId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String deletePersonalData(@DefaultValue("0") @PathParam("pdId") final long id) {
         if (id <= 0) {

@@ -13,8 +13,10 @@ import java.util.List;
 
 /**
  * Веб-сервис, выполняющий работу с номерами телефона.
+ * Использует JPA.
  */
 @Path("/phoneEntry")
+@Produces(MediaType.APPLICATION_JSON)
 public class PhoneHttpController {
 
     private final Repository repository = new Repository();
