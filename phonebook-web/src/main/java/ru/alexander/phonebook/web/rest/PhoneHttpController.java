@@ -1,7 +1,8 @@
 package ru.alexander.phonebook.web.rest;
 
+import ru.alexander.phonebook.entity.PhoneNumberType;
 import ru.alexander.phonebook.entity.PhonebookEntry;
-import ru.alexander.phonebook.jpa.Repository;
+import ru.alexander.phonebook.services.PhonebookEntryService;
 import ru.alexander.phonebook.web.dto.PhonebookDto;
 import ru.alexander.phonebook.web.dto.PhonebookDtoHelper;
 
@@ -19,18 +20,20 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class PhoneHttpController {
 
-    private final Repository repository = new Repository();
+    private static final String OK_RESULT = "{ result: success }";
+
+    private final PhonebookEntryService service = new PhonebookEntryService();
 
     @GET
     public List<PhonebookDto> getAllPhoneEntries() {
-        final Collection<PhonebookEntry> pds = repository.getAllPhoneEntries();
+        final Collection<PhonebookEntry> pds = service.get();
         return new ArrayList<>(PhonebookDtoHelper.convertPhones(pds));
     }
 
     @GET
     @Path("/{phId}")
     public PhonebookDto getPhoneEntry(@DefaultValue("0") @PathParam("phId") long id) {
-        final PhonebookEntry entry = repository.getPhoneEntryById(id);
+        final PhonebookEntry entry = service.get(id);
         return PhonebookDtoHelper.convert(entry);
     }
 
@@ -42,25 +45,8 @@ public class PhoneHttpController {
             @FormParam("phone") String phone,
             @DefaultValue("cell") @FormParam("phoneType") String type
     ) {
-//        PersonalData pd = repository.findPersonalData(name, surname);
-//        if (pd == null) {
-//            pd = new PersonalData();
-//        }
-//        pd.setName(name);
-//        pd.setSurname(surname);
-//        pd = repository.save(pd);
-//
-//        PhonebookEntry entry = new PhonebookEntry();
-//        entry.setPerson(pd);
-//        entry = repository.save(entry);
-//
-//        final PhoneNumber number = new PhoneNumber();
-//        number.setNumber(phone);
-//        number.setPhoneNumberType(PhoneNumberType.valueOf(type));
-//        number.setEntry(entry);
-//        repository.save(number);
-        repository.process(name, surname, phone, type);
-        return "OK!";
+        service.create(name, surname, phone, PhoneNumberType.valueOf(type.toUpperCase()));
+        return OK_RESULT;
     }
 
     @POST
@@ -71,16 +57,16 @@ public class PhoneHttpController {
             @FormParam("phone") String phone,
             @DefaultValue("cell") @FormParam("phoneType") String type
     ) {
-        repository.processPost(name, surname, phone, type);
-        return "OK!";
+        service.update(name, surname, phone, PhoneNumberType.valueOf(type.toUpperCase()));
+        return OK_RESULT;
     }
 
     @DELETE
     @Path("/{phId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String deletePhoneEntry(@DefaultValue("0")  @PathParam("phId") long id) {
-        repository.delete(id);
-        return "OK!";
+    public String deletePhoneEntry(@DefaultValue("0") @PathParam("phId") long id) {
+        service.delete(id);
+        return OK_RESULT;
     }
 
 }

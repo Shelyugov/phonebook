@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':phonebook-jpa')
+    compile project(':phonebook-service')
     compile project(':phonebook-jdbc')
     compile 'com.sun.jersey:jersey-server:1.19'
     compile 'org.glassfish.jersey.media:jersey-media-jaxb:2.25'

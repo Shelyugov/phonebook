@@ -1,4 +1,5 @@
 rootProject.name = 'phonebook'
 include 'phonebook-web', 'phonebook-entity', 'phonebook-jpa'
 include 'phonebook-jdbc'
+include 'phonebook-service'
 

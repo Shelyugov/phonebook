@@ -1,6 +1,6 @@
 package ru.alexander.phonebook.jpa;
 
-import ru.alexander.phonebook.entity.*;
+import ru.alexander.phonebook.entity.PhonebookEntry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,71 +43,22 @@ public class Repository {
         return entry;
     }
 
-    public <T extends AbstractEntity> T save(T e) {
-        final EntityManager em = getEntityManager();
-        final T t = em.merge(e);
-        em.close();
-        return t;
-    }
-
     public void delete(long id) {
         final EntityManager em = getEntityManager();
         em.createQuery(QUERY_REMOVE_BY_ID).setParameter("id", id);
         em.close();
     }
 
-    private EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_NAME);
         return factory.createEntityManager();
     }
 
-    private PhonebookEntry findByPersonalData(final EntityManager em, String name, String surname) {
+    public PhonebookEntry findByPersonalData(final EntityManager em, String name, String surname) {
         return em
                 .createQuery(QUERY_SELECT_PHONEBOOK_ENTRY_BY_PERSON, PhonebookEntry.class)
                 .setParameter("name", name)
                 .setParameter("surname", surname)
                 .getSingleResult();
-    }
-
-    public void process(String name, String surname, String phone, String type) {
-        final EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        PhonebookEntry entry = findByPersonalData(em, name, surname);
-        if (entry == null) {
-            PersonalData pd;
-            pd = new PersonalData();
-            pd.setName(name);
-            pd.setSurname(surname);
-            pd = em.merge(pd);
-
-            entry = new PhonebookEntry();
-            entry.setPerson(pd);
-            entry = em.merge(entry);
-        }
-        final PhoneNumber number = new PhoneNumber();
-        number.setNumber(phone);
-        number.setPhoneNumberType(PhoneNumberType.valueOf(type.toUpperCase()));
-        number.setEntry(entry);
-        em.merge(number);
-        em.getTransaction().commit();
-        em.close();
-    }
-
-    public boolean processPost(String name, String surname, String phone, String type) {
-        boolean result = true;
-        final EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        final PhonebookEntry entry = findByPersonalData(em, name, surname);
-        if (entry != null) {
-            final PhoneNumber number = new PhoneNumber();
-            number.setNumber(phone);
-            number.setPhoneNumberType(PhoneNumberType.valueOf(type.toUpperCase()));
-            number.setEntry(entry);
-            em.merge(number);
-            result = false;
-        }
-        em.getTransaction().commit();
-        em.close();
-        return result;
     }
 }
