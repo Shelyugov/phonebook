@@ -1,42 +1,55 @@
 # phonebook
-**Phonebook application**
+## Phonebook application
 
 To build project, use root phonebook gradle.build file.
 
-**Required setup:**
+## Required setup:
 
 Glassfish 4.0
+
 PostgreSql 9.4
 
-**Request examples:**
+## Request examples:
 
-GET http://localhost:8080/phonebook/rest/data/personalData
+```
+$ curl -X GET http://localhost:8080/phonebook/rest/data/personalData
+```
 
-GET http://localhost:8080/phonebook/rest/data/personalData/id
+```
+$ curl - X GET http://localhost:8080/phonebook/rest/data/personalData/id
+```
 
-PUT http://localhost:8080/phonebook/rest/data/personalData (with form parameters name and surname)
+```
+$ curl -X PUT --data "name=yourname&surname=yoursurname" http://localhost:8080/phonebook/rest/data/personalData
+```
 
-POST http://localhost:8080/phonebook/rest/data/personalData (with id, name and surname form parameters)
+```
+$ curl -X POST --data="id=42&name=yourname&surname=yoursurname" http://localhost:8080/phonebook/rest/data/personalData
+```
 
-DELETE http://localhost:8080/phonebook/rest/data/personalData/id
+```
+$ curl -X DELETE http://localhost:8080/phonebook/rest/data/personalData/id
+```
 
 
-**Obtain information about latest currency conversion at fixer.io**
+### Obtain information about latest currency conversion at fixer.io
 
-GET http://localhost:8080/phonebook/rest/external/currency
+```
+$ curl -X GET http://localhost:8080/phonebook/rest/external/currency
+```
 
 
-**WSDL locations**
+## WSDL locations
 
 http://localhost:8080/phonebook/soap/PersonalData?wsdl
 
 http://localhost:8080/phonebook/soap/Weather?wsdl
 
 
-**Project structure**
+## Project structure
 
 phonebook
 - phonebook-entity
-- phonebook-jpa (Work in progress)
+- phonebook-jpa
 - phonebook-jdbc
 - phonebook-web
