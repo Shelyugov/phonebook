@@ -13,7 +13,7 @@ import java.util.Set;
 public class PhonebookDtoHelper {
 
     public static Collection<PhonebookDto> convert(Collection<PersonalData> personalDataList) {
-        if (personalDataList == null) {
+        if (personalDataList == null || personalDataList.isEmpty()) {
             return Collections.emptySet();
         }
         final Set<PhonebookDto> phoneDtos = new HashSet<>(personalDataList.size());
