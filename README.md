@@ -1,6 +1,7 @@
 # phonebook
 **Phonebook application**
 
+To build project, use root phonebook gradle.build file.
 
 **Required setup:**
 
@@ -15,7 +16,7 @@ GET http://localhost:8080/phonebook/rest/data/personalData/id
 
 PUT http://localhost:8080/phonebook/rest/data/personalData (with form parameters name and surname)
 
-POST http://localhost:8080/phonebook/rest/data/personalData (with id, name and surname parameters)
+POST http://localhost:8080/phonebook/rest/data/personalData (with id, name and surname form parameters)
 
 DELETE http://localhost:8080/phonebook/rest/data/personalData/id
 
@@ -39,5 +40,3 @@ phonebook
 - phonebook-jpa (Work in progress)
 - phonebook-jdbc
 - phonebook-web
-
-To build project, use root phonebook gradle.build file.
