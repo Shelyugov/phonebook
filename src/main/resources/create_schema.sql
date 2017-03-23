@@ -14,7 +14,7 @@ CREATE SEQUENCE phonebook_entry_sequence;
 
 CREATE TABLE phonebook_entry (
     id BIGINT PRIMARY KEY DEFAULT NEXTVAL('phonebook_entry_sequence'),
-    personal_data_id BIGINT UNIQUE NOT NULL REFERENCES personal_data(id)
+    person_id BIGINT UNIQUE NOT NULL REFERENCES personal_data(id)
 );
 
 CREATE SEQUENCE phone_number_sequence;
@@ -22,8 +22,8 @@ CREATE SEQUENCE phone_number_sequence;
 CREATE TABLE phone_number (
     id BIGINT PRIMARY KEY DEFAULT NEXTVAL('phone_number_sequence'),
     number CHARACTER VARYING (64) UNIQUE,
-    phone_number_type CHARACTER (4),
-    phonebook_entry_id BIGINT NOT NULL REFERENCES phonebook_entry(id)
+    phone_number_type VARCHAR (4),
+    entry_id BIGINT NOT NULL REFERENCES phonebook_entry(id)
 );
 
 CREATE USER phonebook_user WITH PASSWORD 'password';
