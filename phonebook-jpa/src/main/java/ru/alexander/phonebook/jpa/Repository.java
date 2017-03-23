@@ -11,11 +11,18 @@ import javax.persistence.Persistence;
  */
 public class Repository {
 
-    public void save(PersonalData personalData) {
-        final EntityManagerFactory factory = Persistence.createEntityManagerFactory("PhonebookPersistence");
-        final EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(personalData);
-        em.getTransaction().commit();
+    public boolean save(PersonalData personalData) {
+        boolean result = false;
+        try {
+            final EntityManagerFactory factory = Persistence.createEntityManagerFactory("PhonebookPersistence");
+            final EntityManager em = factory.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(personalData);
+            em.getTransaction().commit();
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
