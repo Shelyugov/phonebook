@@ -66,14 +66,12 @@ public class PhoneHttpController {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String updatePhoneEntry(
-            @FormParam("id") long id,
             @FormParam("name") String name,
             @FormParam("surname") String surname,
             @FormParam("phone") String phone,
             @DefaultValue("cell") @FormParam("phoneType") String type
     ) {
-        final PhonebookEntry entry = repository.getPhoneEntryById(id);
-        repository.save(entry);
+        repository.processPost(name, surname, phone, type);
         return "OK!";
     }
 

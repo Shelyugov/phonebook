@@ -31,8 +31,8 @@ public class PhonebookDtoHelper {
             return Collections.emptySet();
         }
         final Set<PhonebookDto> phoneDtos = new HashSet<>(phones.size());
-        for (PhonebookEntry pd : phones) {
-            phoneDtos.add(convert(pd));
+        for (PhonebookEntry phone : phones) {
+            phoneDtos.add(convert(phone));
         }
         phoneDtos.remove(null);
         return phoneDtos;
