@@ -7,6 +7,7 @@ import java.io.Serializable;
  * Номер телефона.
  */
 @Entity
+@Table(name = "phone_number")
 public class PhoneNumber extends AbstractEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -16,6 +17,7 @@ public class PhoneNumber extends AbstractEntity implements Serializable {
     @Column(nullable = false, unique = true)
     private String number;
 
+    @Column(name = "phone_number_type")
     @Enumerated(EnumType.STRING)
     private PhoneNumberType phoneNumberType;
 

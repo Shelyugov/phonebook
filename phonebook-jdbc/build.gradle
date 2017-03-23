@@ -1,4 +1,4 @@
 dependencies {
-    compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0'
+    compile 'org.postgresql:postgresql:42.0.0'
     compile project(':phonebook-entity')
 }
