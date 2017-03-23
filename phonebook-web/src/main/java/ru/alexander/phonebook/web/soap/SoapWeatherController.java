@@ -1,7 +1,6 @@
 package ru.alexander.phonebook.web.soap;
 
 import net.webservicex.GlobalWeather;
-import net.webservicex.GlobalWeatherSoap;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -17,13 +16,8 @@ public class SoapWeatherController {
 
     private final GlobalWeather soap = new GlobalWeather();
 
-    @WebMethod(exclude = true)
-    public GlobalWeatherSoap getGlobalWeatherSoap() {
-        return soap.getGlobalWeatherSoap();
-    }
-
     @WebMethod
-    public String helloWorld() {
-        return "Hello, SOAP world!";
+    public Object getGlobalWeatherSoap() {
+        return soap.getGlobalWeatherSoap();
     }
 }
