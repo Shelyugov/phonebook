@@ -3,13 +3,13 @@
 
 To build project, use root phonebook `gradle.build` file.
 
-## Required setup:
+## Required setup
 
 Glassfish 4.0
 
 PostgreSql 9.4
 
-## Request examples:
+## Request examples
 
 ```
 $ curl -X GET http://localhost:8080/phonebook/rest/data/personalData
