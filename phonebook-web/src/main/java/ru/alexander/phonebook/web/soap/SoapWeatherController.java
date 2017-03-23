@@ -17,7 +17,8 @@ public class SoapWeatherController {
     private final GlobalWeather soap = new GlobalWeather();
 
     @WebMethod
-    public Object getGlobalWeatherSoap() {
-        return soap.getGlobalWeatherSoap();
+    public String getGlobalWeatherSoap() {
+        //return soap.getGlobalWeatherSoap();
+        return "Weather API's coming up!";
     }
 }
