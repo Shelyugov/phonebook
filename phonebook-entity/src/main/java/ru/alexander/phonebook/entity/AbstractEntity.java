@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Абстрактная сущность.
  */
 @MappedSuperclass
-abstract class AbstractEntity implements Serializable {
+public abstract class AbstractEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

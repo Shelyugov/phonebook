@@ -9,6 +9,14 @@ import java.io.Serializable;
 @XmlRootElement
 public class PhoneDto implements Serializable {
 
+    public PhoneDto() {
+    }
+
+    public PhoneDto(String number, String type) {
+        this.number = number;
+        this.type = type;
+    }
+
     private String number;
 
     private String type;
