@@ -2,19 +2,34 @@ package ru.alexander.phonebook.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * Персональные данные.
  */
 @Entity
+@XmlRootElement
 public class PersonalData extends AbstractEntity implements Serializable {
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "surname", nullable = false)
     private String surname;
+
+    public PersonalData() {
+    }
+
+    public PersonalData(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public PersonalData(long id, String name, String surname) {
+        this(name, surname);
+        setId(id);
+    }
 
     public String getName() {
         return name;

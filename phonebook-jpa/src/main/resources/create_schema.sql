@@ -23,3 +23,6 @@ CREATE TABLE phone_number (
     phone_number_type CHARACTER (4),
     phonebook_entry_id INTEGER NOT NULL REFERENCES phonebook_entry(id)
 );
+
+CREATE USER phonebook_user WITH PASSWORD 'password';
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO phonebook_user;
