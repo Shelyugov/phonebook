@@ -40,7 +40,7 @@ $ curl -X GET http://localhost:8080/phonebook/rest/data/phoneEntry
 ```
 
 ```
-$ curl -X POST --data="id=42&name=yourname&surname=yoursurname&phone=123456789&type=cell" http://localhost:8080/phonebook/rest/phoneEntry
+$ curl -X POST --data="name=yourname&surname=yoursurname&phone=123456789&type=cell" http://localhost:8080/phonebook/rest/phoneEntry
 ```
 
 ### Obtain information about latest currency conversion at [fixer.io](http://fixer.io/)
