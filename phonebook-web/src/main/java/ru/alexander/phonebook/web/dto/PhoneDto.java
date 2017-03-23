@@ -1,10 +1,12 @@
 package ru.alexander.phonebook.web.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * DTO, содержащая информацию о некотором номере телефона.
  */
+@XmlRootElement
 public class PhoneDto implements Serializable {
 
     private String number;

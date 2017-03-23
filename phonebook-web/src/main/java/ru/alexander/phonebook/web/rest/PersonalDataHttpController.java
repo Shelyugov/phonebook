@@ -25,7 +25,7 @@ public class PersonalDataHttpController {
     @Path("/personalData")
     @Produces(MediaType.APPLICATION_XML)
     public List<PhonebookDto> getAllPersonalData() {
-        return new ArrayList(PhonebookDtoHelper.convert(repository.getAllPersonalData()));
+        return new ArrayList<>(PhonebookDtoHelper.convert(repository.getAllPersonalData()));
     }
 
     @GET
