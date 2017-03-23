@@ -1,7 +1,7 @@
 # phonebook
 ## How to build
 
-To build project, use root phonebook `gradle.build` file.
+To build project, use root phonebook `gradle.build` file. The command is `gradle war`.
 
 The script to initialize database is stored in [create_schema.sql](src/main/resources/create_schema.sql) file.
 
