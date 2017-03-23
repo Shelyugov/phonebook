@@ -1,12 +1,16 @@
 package ru.alexander.phonebook.web.soap;
 
-import ru.alexander.phonebook.web.dto.PhoneBookDto;
-import ru.alexander.phonebook.web.dto.PhoneDto;
+import ru.alexander.phonebook.entity.PersonalData;
+import ru.alexander.phonebook.jdbc.PersonalDataRepository;
+import ru.alexander.phonebook.web.dto.PhonebookDto;
+import ru.alexander.phonebook.web.dto.PhonebookDtoHelper;
 
 import javax.jws.WebMethod;
+import javax.jws.WebResult;
 import javax.jws.WebService;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,18 +18,16 @@ import java.util.Set;
  */
 @WebService
 public class SoapPhonebookController {
-    @WebMethod
-    public Set<PhoneBookDto> getAllPhoneNumbers() {
-        final PhoneBookDto dto = new PhoneBookDto();
-        dto.setName("Hello");
-        dto.setSurname("World");
-        final Set<PhoneDto> phoneDtos = new HashSet<>();
-        final PhoneDto phoneDto = new PhoneDto();
-        phoneDto.setNumber("+7(915)974-89-83");
-        phoneDto.setType("CELL");
-        phoneDtos.add(phoneDto);
-        dto.setPhoneDtos(phoneDtos);
 
-        return new HashSet<>(Arrays.asList(dto));
+    private PersonalDataRepository repository = new PersonalDataRepository();
+
+    @WebMethod
+    @WebResult(name = "personalData")
+    public Set<PhonebookDto> getAllPersonalData() {
+        final List<PersonalData> personalDataList = repository.getAllPersonalData();
+        if (personalDataList == null) {
+            return Collections.emptySet();
+        }
+        return new HashSet<>(PhonebookDtoHelper.convert(personalDataList));
     }
 }

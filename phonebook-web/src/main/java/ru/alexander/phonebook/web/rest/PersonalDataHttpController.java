@@ -2,9 +2,12 @@ package ru.alexander.phonebook.web.rest;
 
 import ru.alexander.phonebook.entity.PersonalData;
 import ru.alexander.phonebook.jdbc.PersonalDataRepository;
+import ru.alexander.phonebook.web.dto.PhonebookDto;
+import ru.alexander.phonebook.web.dto.PhonebookDtoHelper;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,18 +24,18 @@ public class PersonalDataHttpController {
     @GET
     @Path("/personalData")
     @Produces(MediaType.APPLICATION_XML)
-    public List<PersonalData> getAllPersonalData() {
-        return repository.getAllPersonalData();
+    public List<PhonebookDto> getAllPersonalData() {
+        return new ArrayList(PhonebookDtoHelper.convert(repository.getAllPersonalData()));
     }
 
     @GET
     @Path("/personalData/{pdId}")
     @Produces(MediaType.APPLICATION_XML)
-    public PersonalData getPersonalData(@DefaultValue("0") @PathParam("pdId") long id) {
+    public PhonebookDto getPersonalData(@DefaultValue("0") @PathParam("pdId") long id) {
         if (id <= 0) {
             return null;
         }
-        return repository.getPersonalData(id);
+        return PhonebookDtoHelper.convert(repository.getPersonalData(id));
     }
 
     @PUT

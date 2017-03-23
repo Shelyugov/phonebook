@@ -1,12 +1,14 @@
 package ru.alexander.phonebook.web.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Set;
 
 /**
  * DTO элемента телефонной книги.
  */
-public class PhoneBookDto implements Serializable {
+@XmlRootElement
+public class PhonebookDto implements Serializable {
 
     private String name;
 
