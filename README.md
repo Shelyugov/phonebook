@@ -16,7 +16,7 @@ $ curl -X GET http://localhost:8080/phonebook/rest/data/personalData
 ```
 
 ```
-$ curl - X GET http://localhost:8080/phonebook/rest/data/personalData/id
+$ curl -X GET http://localhost:8080/phonebook/rest/data/personalData/id
 ```
 
 ```
