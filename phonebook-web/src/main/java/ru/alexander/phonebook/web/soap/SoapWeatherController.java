@@ -13,7 +13,6 @@ import javax.jws.WebService;
  * @see <a href="http://www.webservicex.com/New/Home/ServiceDetail/56">GlobalWeather service description</a>
  * @see <a href="http://www.webservicex.com/globalweather.asmx?wsdl">GlobalWeather WSDL file</a>
  */
-
 @WebService
 public class SoapWeatherController {
 

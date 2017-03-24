@@ -1,7 +1,6 @@
 package ru.alexander.phonebook.web.rest;
 
-import ru.alexander.phonebook.entity.PersonalData;
-import ru.alexander.phonebook.jdbc.PersonalDataRepository;
+import ru.alexander.phonebook.services.PersonalDataService;
 import ru.alexander.phonebook.web.dto.PhonebookDto;
 import ru.alexander.phonebook.web.dto.PhonebookDtoHelper;
 
@@ -21,20 +20,17 @@ public class PersonalDataHttpController {
     private static final String SUCCESS_RESULT = "<result>success</result>";
     private static final String FAILURE_RESULT = "<result>failure</result>";
 
-    private final PersonalDataRepository repository = new PersonalDataRepository();
+    private final PersonalDataService service = new PersonalDataService();
 
     @GET
     public List<PhonebookDto> getAllPersonalData() {
-        return new ArrayList<>(PhonebookDtoHelper.convert(repository.getAllPersonalData()));
+        return new ArrayList<>(PhonebookDtoHelper.convert(service.get()));
     }
 
     @GET
     @Path("/{pdId}")
-    public PhonebookDto getPersonalData(@DefaultValue("0") @PathParam("pdId") long id) {
-        if (id <= 0) {
-            return null;
-        }
-        return PhonebookDtoHelper.convert(repository.getPersonalData(id));
+    public PhonebookDto getPersonalData(@DefaultValue("0") @PathParam("pdId") final Long id) {
+        return PhonebookDtoHelper.convert(service.get(id));
     }
 
     @PUT
@@ -43,24 +39,21 @@ public class PersonalDataHttpController {
             @FormParam("name") String name,
             @FormParam("surname") String surname
     ) {
-        final PersonalData pd = new PersonalData(name, surname);
-        if (repository.create(pd)) {
+        if (service.create(name, surname)) {
             return SUCCESS_RESULT;
         } else {
             return FAILURE_RESULT;
         }
     }
 
-
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String updatePersonalData(
-            @FormParam("id") long id,
+            @FormParam("id") final Long id,
             @FormParam("name") String name,
             @FormParam("surname") String surname
     ){
-       final PersonalData pd = new PersonalData(id, name, surname);
-        if (repository.update(pd)) {
+        if (service.update(id, name, surname)) {
             return SUCCESS_RESULT;
         } else {
             return FAILURE_RESULT;
@@ -70,11 +63,8 @@ public class PersonalDataHttpController {
     @DELETE
     @Path("/{pdId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String deletePersonalData(@DefaultValue("0") @PathParam("pdId") final long id) {
-        if (id <= 0) {
-            return FAILURE_RESULT;
-        }
-        if (repository.delete(id)) {
+    public String deletePersonalData(@DefaultValue("0") @PathParam("pdId") final Long id) {
+        if (service.delete(id)) {
             return SUCCESS_RESULT;
         } else {
             return FAILURE_RESULT;
