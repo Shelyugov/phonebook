@@ -32,7 +32,7 @@ public class ExternalHTTPService {
     private static final String DEFAULT_DATE = "latest";
 
     @GET
-    @Path("/currency")
+    @Path("/currency/{date}")
     public Response getCurrency(@PathParam("date") @DefaultValue(DEFAULT_DATE) String date) {
         final Client client = ClientBuilder.newClient();
         final WebTarget target = client.target(RESOURCE_URI).path(date).queryParam("base", ROUBLES);
